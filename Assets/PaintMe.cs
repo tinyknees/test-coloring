@@ -6,17 +6,13 @@ using System.Collections;
 public class PaintMe : MonoBehaviour
 {
 
+    public SteamVR_TrackedObject trackedObj;
+
     public Color ClearColour;
     public Material PaintShader;
     public RenderTexture PaintTarget;
     private RenderTexture TempRenderTarget;
     private Material ThisMaterial;
-    public SteamVR_TrackedObject trackedObj;
-
-    void Awake()
-    {
-        trackedObj = GetComponent<SteamVR_TrackedObject>();
-    }
 
     void Init()
     {
@@ -50,12 +46,21 @@ public class PaintMe : MonoBehaviour
         }
     }
 
-    //called for every physics step (fixed interval between calls). Update settings Unity > Edit > Project Settings > Time: 1/90 or 0.011111
-    void FixedUpdate()
+    // Update is called once per frame
+    void Update()
     {
 
         RaycastHit hitInfo = new RaycastHit();
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        // OnMouseDown
+        //if (Input.GetMouseButton(0))
+        //{
+        //    if (Physics.Raycast(ray, out hitInfo))
+        //    {
+        //        hitInfo.collider.SendMessage("HandleClick", hitInfo, SendMessageOptions.DontRequireReceiver);
+        //    }
+        //}
 
         // On GetTouch
         SteamVR_Controller.Device device = SteamVR_Controller.Input((int)trackedObj.index); //assign device on every fixed update for the input using the index of the tracked object
@@ -71,8 +76,8 @@ public class PaintMe : MonoBehaviour
 
     void HandleClick(RaycastHit Hit)
     {
-        Vector2 LocalHit2 = Hit.textureCoord;
-        PaintAt(LocalHit2);
+        Vector2 LocalHit2 = Hit.textureCoord; //see where this is outputting
+        PaintAt(LocalHit2); //receives coord relative to texture based on collider
     }
 
 
