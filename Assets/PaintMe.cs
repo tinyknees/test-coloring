@@ -7,7 +7,6 @@ public class PaintMe : MonoBehaviour
 {
 
     public SteamVR_TrackedObject trackedObj;
-
     public Color ClearColour;
     public Material PaintShader;
     public RenderTexture PaintTarget;
@@ -52,15 +51,6 @@ public class PaintMe : MonoBehaviour
 
         RaycastHit hitInfo = new RaycastHit();
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        // OnMouseDown
-        //if (Input.GetMouseButton(0))
-        //{
-        //    if (Physics.Raycast(ray, out hitInfo))
-        //    {
-        //        hitInfo.collider.SendMessage("HandleClick", hitInfo, SendMessageOptions.DontRequireReceiver);
-        //    }
-        //}
 
         // On GetTouch
         SteamVR_Controller.Device device = SteamVR_Controller.Input((int)trackedObj.index); //assign device on every fixed update for the input using the index of the tracked object
