@@ -45,20 +45,20 @@ public class PaintMe : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    void Update() // Update is called once per frame
     {
 
         RaycastHit hitInfo = new RaycastHit();
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         // On GetTouch
-        SteamVR_Controller.Device device = SteamVR_Controller.Input((int)trackedObj.index); //assign device on every fixed update for the input using the index of the tracked object
+        SteamVR_Controller.Device device = SteamVR_Controller.Input((int)trackedObj.index); //assign device
         if (device.GetTouch(SteamVR_Controller.ButtonMask.Trigger))
         {
             if (Physics.Raycast(ray, out hitInfo))
             {
                 hitInfo.collider.SendMessage("HandleClick", hitInfo, SendMessageOptions.DontRequireReceiver);
+                Debug.Log("ray " + ray.ToString("F4"));
             }
         }
 
