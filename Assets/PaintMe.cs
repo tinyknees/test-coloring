@@ -45,8 +45,7 @@ public class PaintMe : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    void Update() // Update is called once per frame
     {
 
         RaycastHit hitInfo = new RaycastHit();
@@ -59,7 +58,7 @@ public class PaintMe : MonoBehaviour
             if (Physics.Raycast(ray, out hitInfo))
             {
                 hitInfo.collider.SendMessage("HandleClick", hitInfo, SendMessageOptions.DontRequireReceiver);
-                Debug.Log("Hit something!");
+                Debug.Log("ray " + ray.ToString("F4"));
             }
         }
 
